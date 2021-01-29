@@ -17,7 +17,7 @@ jobs:
           )
         )
         .github/workflows/test-helpers/get-issue-validation-log "${issue_number}"
-        set +x
+        set -x
         grep "Skipping validation" log
   case_2:
     name: "It runs non-member issues through validation."
@@ -56,7 +56,7 @@ jobs:
       run: |
         issue_number="${{ steps.setup.outputs.issue_number }}"
         .github/workflows/test-helpers/get-issue-validation-log "${issue_number}"
-        set +x
+        set -x
         grep "sentry-test-fixture-nonmember is not a member of the getsentry org." log
         grep "BUG_REPORT.md? Match! 👍 💃" log
   case_3:
@@ -87,7 +87,7 @@ jobs:
       run: |
         issue_number="${{ steps.setup.outputs.issue_number }}"
         .github/workflows/test-helpers/get-issue-validation-log "${issue_number}"
-        set +x
+        set -x
         grep "BUG_REPORT.md? Match! 👍 💃" log
   case_4:
     name: "It closes invalid issues with a comment."
@@ -110,7 +110,7 @@ jobs:
       run: |
         issue_number="${{ steps.setup.outputs.issue_number }}"
         .github/workflows/test-helpers/get-issue-validation-log "${issue_number}"
-        set +x
+        set -x
         grep 'BUG_REPORT.md? No match. 👎'
         grep 'FEATURE_REQUEST.md? No headers in template. 🤷'
         grep 'Commented: "https://github.com/${{ github.repository }}' log
