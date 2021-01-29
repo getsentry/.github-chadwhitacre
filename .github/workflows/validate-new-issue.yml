@@ -33,6 +33,7 @@ jobs:
           echo -n "$(basename $template)? "
           if [ ! -s headings-in-template ]; then
             echo "No headers in template. 🤷"
+          elif [ -z "$(comm -23 headings-in-template headings-in-issue)" ]; then
             echo "Match! 👍 💃"
             exit 0
           else
